@@ -8,8 +8,8 @@ Follow.destroy_all
 TimeBlock.destroy_all
 
 # 创建用户
-user1 = User.create!(email: "alice@example.com", password_digest: "password123", role: "user")
-user2 = User.create!(email: "bob@example.com", password_digest: "password456", role: "user")
+user1 = User.create!(email: "alice@example.com", password: "password123", role: "user")
+user2 = User.create!(email: "bob@example.com", password: "password456", role: "user")
 
 # 创建习惯
 habit1 = Habit.create!(name: "Morning Run", description: "Run 5km every morning", user: user1)

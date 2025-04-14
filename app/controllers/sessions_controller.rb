@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:create, :destroy]
+  skip_before_action :verify_authenticity_token, only: [:create, :destroy]
   def new
   end
 
@@ -20,6 +20,7 @@ class SessionsController < ApplicationController
       redirect_to dashboard_path, notice: 'Sign in successfully'
     else
       flash[:alert] = 'Incorrect e-mail or password'
+      puts "Login failed for email: #{params[:email]}"  # 这里打印一下尝试登录的 email
       render :new
     end
   end
