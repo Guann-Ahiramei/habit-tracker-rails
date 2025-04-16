@@ -25,7 +25,7 @@ default: &default
 
 development:
   <<: *default
-  database: habit_tracker
+  database: habit_tracker_app
   username: postgres
   password: 123456
   host: localhost
@@ -62,7 +62,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: habit_tracker_test
+  database: habit_tracker_app_test
   username: postgres
   password: 123456
   host: localhost
@@ -91,6 +91,8 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  sslmode: require # Neon 需要 SSL 连接
   # primary: &primary_production
   #   <<: *default
   #   database: habit_tracker_production

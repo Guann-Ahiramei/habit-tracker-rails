@@ -1,8 +1,9 @@
 class DashboardController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:index]
+  skip_before_action :verify_authenticity_token, only: [:index]
   before_action :authenticate_user!
   
   def index
+    puts "Current User: #{current_user.inspect}"
     start_of_week = Time.current.beginning_of_week
     end_of_week = Time.current.end_of_week
 

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  # skip_before_action :verify_authenticity_token, only: [:show, :index, :create, :follow, :unfollow]
+  skip_before_action :verify_authenticity_token, only: [:show, :index, :create, :follow, :unfollow]
+  before_action :authenticate_user!
   def new
     @user = User.new
   end
@@ -27,6 +28,11 @@ class UsersController < ApplicationController
   end
 
   def index
+    if current_user.nil?
+      redirect_to new_user_session_path, alert: "Please log in to view this page."
+      return
+    end
+
     if params[:search].present?
       @searched_user = User.where("email LIKE ?", "%#{params[:search]}%").where.not(id: current_user.id).first
     end
